@@ -1,0 +1,14 @@
+  neocomplete.vim
+  neomru.vim
+  neosnippet-snippets
+  neosnippet.vim
+  unite.vim
+  vesting
+  vim-colorschemes
+  vim-fugitive
+  vimfiler.vim
+  vimproc.vim
+  vimshell.vim
+  vinarise.vim
+  wildfire.vim
+X neobundle.vim
