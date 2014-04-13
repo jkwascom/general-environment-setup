@@ -106,5 +106,23 @@ set wrapscan
 
 set rtp+=$POWERLINE_HOME/bindings/vim
 
+call neobundle#rc()
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/vinarise.vim'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'gcmt/wildfire.vim'
+NeoBundle 'Shougo/vesting'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+
+filetype plugin indent on
 " Go ahead and kill any prior search i guess
 nohl

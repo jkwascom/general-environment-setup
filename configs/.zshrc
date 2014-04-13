@@ -106,6 +106,11 @@ setenv() { export $1=$2 }  # csh compatibility
 sdate() { date +%Y.%m.%d }
 pc() { awk "{print \$$1}" }
 rot13 () { tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]" }
+vim-command-show () {
+	vim -c "redir @\" | silent $@ | redir END | set paste | exe \"normal pdd\" | x! /tmp/supertmp.tmpytmp"
+  cat /tmp/supertmp.tmpytmp
+  rm /tmp/supertmp.tmpytmp
+}
 
 # shuffle input lines. Nice for mp3 playlists etc...
 shuffle() {
