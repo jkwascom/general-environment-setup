@@ -11,17 +11,20 @@ zstyle ':completion:*' prompt 'Possible Corrections'
 zstyle ':completion:*' substitute 0
 zstyle :compinstall filename '/home/jkwascom/.zshrc'
 
-function edit-zshrc() {
-    vi ~/.zshrc
-    source ~/.zshrc
+fpath=("$HOME/.zsh/functions" $fpath)
+testingit() {
+  print 'output of tty: ' `tty`
+  print 'value of $TTY: ' `echo $TTY`
 }
-
+autoload -Uz edit-zshrc 
 zle -N edit-zshrc
+zle -N testingit
 
 bindkey -v
 bindkey '[1~' vi-beginning-of-line
 bindkey '[4~' vi-end-of-line
 bindkey '[24~' edit-zshrc
+bindkey '[23~' testingit 
 ##autoload -Uz compinit
 ##compinit
 # End of lines added by compinstall
@@ -85,7 +88,7 @@ if ls -F --color=auto >&/dev/null; then
 else
   alias ls="ls -F"
 fi
-alias ll="ls -lArt"
+alias ll="ls -lArti"
 alias l.='ls -d .[^.]*'
 alias lsd='ls -ld *(-/DN)'
 alias md='mkdir -p'
@@ -144,5 +147,7 @@ if [ x$TMUX == x ]; then
     tmux new-session -t 0
     #`tmux list-sessions 2> /dev/null 1>&2` || tmux -l && tmux attach
 fi
-echo 'new-session -t 0 is the tmux command you keep looking for'
-echo 'http://linuxlefty.com/tools/favorite-vim-plugins-vi-gvim.html'
+
+#echo 'new-session -t 0 is the tmux command you keep looking for'
+echo 'hmm... http://linuxlefty.com/tools/favorite-vim-plugins-vi-gvim.html'
+export KEYTIMEOUT=1

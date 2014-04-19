@@ -1,9 +1,9 @@
 #!/usr/bin/zsh
-CLOUD_ENV_ROOT="workspace/cygwin/google-docs/cloud-workspace"
-CLOUD_CONFIG_ROOT="$CLOUD_ENV_ROOT/setup/configs"
-CLOUD_PACKAGELIST_ROOT="$CLOUD_ENV_ROOT/setup/packages"
-LOCAL_PACKAGELIST_ROOT="/tmp"
 LOCAL_CONFIG_ROOT="$HOME"
+LOCAL_PACKAGELIST_ROOT="/tmp"
+CLOUD_ENV_ROOT="$LOCAL_CONFIG_ROOT/general-environment-setup"
+CLOUD_CONFIG_ROOT="$CLOUD_ENV_ROOT/configs"
+CLOUD_PACKAGELIST_ROOT="$CLOUD_ENV_ROOT/packages"
 MODE="check"
 PACKAGELIST_SUFFIX="pkglist"
 PACMAN_LIST="pacman.$PACKAGELIST_SUFFIX"
@@ -11,6 +11,10 @@ PIP_LIST="pip.$PACKAGELIST_SUFFIX"
 VIM_LIST="vim.$PACKAGELIST_SUFFIX"
 if [[ "$1" == "show" ]] {
   MODE="show"
+}
+
+if [[ "$1" == "update-local" ]] {
+  MODE="update-local"
 }
 
 generate_package_lists() {
@@ -32,6 +36,25 @@ check_up_to_date () {
 
 show_diff () {
   git diff --no-index $1 $2
+}
+
+update_local_packages() {
+  LOCAL_ROOT="$1"
+  CLOUD_ROOT="$2"
+  SYNC_FILE_NAME="$3"
+  cat $CLOUD_ROOT/$SYNC_FILE_NAME | xargs -I% sudo pacman -S --noconfirm %
+}
+
+update_local_config() {
+  LOCAL_ROOT="$1"
+  CLOUD_ROOT="$2"
+  SYNC_FILE_NAME="$3"
+  cp $2/$3 $1
+}
+
+if [[ $MODE == "update-local" ]] {
+  update_local_packages $LOCAL_PACKAGELIST_ROOT $CLOUD_PACKAGELIST_ROOT $PACMAN_LIST
+  return 0
 }
 
 #ls -A1 workspace/cygwin/google-docs/cloud-workspace/setup/configs | xargs -I% check_up_to_date $LOCAL_CONFIG_ROOT $CLOUD_CONFIG_ROOT %
