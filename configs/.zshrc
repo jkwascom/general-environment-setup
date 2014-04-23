@@ -134,7 +134,7 @@ prompt adam2
 #    export RPROMPT='%~ %# '
 #fi
 
-export LESS='SRFX'
+export LESS='RFX'
 export PATH=~/.local/bin:$PATH
 export POWERLINE_HOME=/lib/python3.4/site-packages/powerline
 source $POWERLINE_HOME/bindings/zsh/powerline.zsh
