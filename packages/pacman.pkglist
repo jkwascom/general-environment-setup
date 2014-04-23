@@ -1,11 +1,15 @@
+alsa-oss
+alsa-utils
 aurget
 autoconf
 automake
 bash
 bison
+busybox
 bzip2
 clewn
 coreutils
+cowsay
 cronie
 cryptsetup
 ctags
@@ -14,7 +18,11 @@ dhcpcd
 diffutils
 dnsutils
 e2fsprogs
+espeak
 fakeroot
+festival
+festival-english
+festival-us
 file
 filesystem
 findutils
@@ -38,6 +46,7 @@ inetutils
 iproute2
 iputils
 ipython2
+jdk7-openjdk
 jfsutils
 jre7-openjdk
 less
@@ -45,6 +54,7 @@ libimobiledevice
 libtool
 licenses
 linux
+linux-docs
 logrotate
 lsof
 lvm2

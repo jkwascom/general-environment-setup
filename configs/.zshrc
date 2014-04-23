@@ -142,12 +142,13 @@ export ADVOCATE_HOME=/workspace/jkwascom/dti/all
 export MAIN_PUBS="$ADVOCATE_HOME/ADVOCATE $ADVOCATE_HOME/NEWORLEANS $ADVOCATE_HOME/SHARED"
 pubcrawl() { grep -r -E $@ $ADVOCATE_HOME/ADVOCATE $ADVOCATE_HOME/NEWORLEANS $ADVOCATE_HOME/SHARED}
 
+export KEYTIMEOUT=1
+#if we're not in tmux, start tmux
 if [ x$TMUX == x ]; then
     tmux has-session -t 0 2> /dev/null || tmux new-session -s 0
     tmux new-session -t 0
     #`tmux list-sessions 2> /dev/null 1>&2` || tmux -l && tmux attach
+    #echo 'new-session -t 0 is the tmux command you keep looking for'
+    #echo 'http://linuxlefty.com/tools/favorite-vim-plugins-vi-gvim.html'
 fi
 
-#echo 'new-session -t 0 is the tmux command you keep looking for'
-echo 'hmm... http://linuxlefty.com/tools/favorite-vim-plugins-vi-gvim.html'
-export KEYTIMEOUT=1

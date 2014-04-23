@@ -1,0 +1,21 @@
+{
+    "help-commands" : [
+        {
+            "comments": ["general reflection"],
+            "command-names": [":h"],
+            "command-arguments": 
+            [
+                [ "", "<KEY_SEQUENCE>","<COMMAND>","<VIM_ELEMENT>" ]
+            ]
+        },
+        {
+            "comments": ["key binding lookup", "set verbose option higher than 0 to also see source file where these were defined"],
+            "command-names": [":map",":nmap", "bunch of others"],
+            "command-arguments": 
+            [
+                [ "", "<KEY_SEQUENCE>","<COMMAND>","<VIM_ELEMENT>" ]
+            ]
+        }
+    ]
+}
+

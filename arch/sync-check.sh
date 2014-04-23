@@ -9,8 +9,14 @@ PACKAGELIST_SUFFIX="pkglist"
 PACMAN_LIST="pacman.$PACKAGELIST_SUFFIX"
 PIP_LIST="pip.$PACKAGELIST_SUFFIX"
 VIM_LIST="vim.$PACKAGELIST_SUFFIX"
+SYNC_OUTPUT_FILE="/tmp/sync-check-output.tmp"
+
 if [[ "$1" == "show" ]] {
   MODE="show"
+}
+
+if [[ "$1" == "synchronize" ]] {
+  MODE="synchronize"
 }
 
 if [[ "$1" == "update-local" ]] {
@@ -28,14 +34,21 @@ check_up_to_date () {
   CLOUD_ROOT="$2"
   SYNC_FILE_NAME="$3"
   test `diff $LOCAL_ROOT/$SYNC_FILE_NAME $CLOUD_ROOT/$SYNC_FILE_NAME  | wc -l` -eq 0 && return 0
-  echo "$SYNC_FILE_NAME differs"
-  if [[ $MODE == "show" ]] {
-    show_diff $LOCAL_ROOT/$SYNC_FILE_NAME $CLOUD_ROOT/$SYNC_FILE_NAME
+  if [[ $MODE == "synchronize" ]] {
+    vim -d $LOCAL_ROOT/$SYNC_FILE_NAME $CLOUD_ROOT/$SYNC_FILE_NAME < $TTY > $TTY
+    return 0 
   }
+  if [[ $MODE == "check" ]] {
+    echo "$SYNC_FILE_NAME differs" >> $SYNC_OUTPUT_FILE
+  }
+  if [[ $MODE == "show" ]] {
+    show_diff $LOCAL_ROOT/$SYNC_FILE_NAME $CLOUD_ROOT/$SYNC_FILE_NAME >> $SYNC_OUTPUT_FILE
+  }
+  echo "" >> $SYNC_OUTPUT_FILE
 }
 
 show_diff () {
-  git diff --no-index $1 $2
+  git diff --color --no-index $1 $2
 }
 
 update_local_packages() {
@@ -52,10 +65,13 @@ update_local_config() {
   cp $2/$3 $1
 }
 
+
 if [[ $MODE == "update-local" ]] {
   update_local_packages $LOCAL_PACKAGELIST_ROOT $CLOUD_PACKAGELIST_ROOT $PACMAN_LIST
   return 0
 }
+
+echo "Sync Check Results:" > $SYNC_OUTPUT_FILE
 
 #ls -A1 workspace/cygwin/google-docs/cloud-workspace/setup/configs | xargs -I% check_up_to_date $LOCAL_CONFIG_ROOT $CLOUD_CONFIG_ROOT %
 check_up_to_date $LOCAL_CONFIG_ROOT $CLOUD_CONFIG_ROOT '.zshrc'
@@ -67,3 +83,5 @@ generate_package_lists $LOCAL_PACKAGELIST_ROOT
 check_up_to_date $LOCAL_PACKAGELIST_ROOT $CLOUD_PACKAGELIST_ROOT $PACMAN_LIST
 check_up_to_date $LOCAL_PACKAGELIST_ROOT $CLOUD_PACKAGELIST_ROOT $PIP_LIST
 check_up_to_date $LOCAL_PACKAGELIST_ROOT $CLOUD_PACKAGELIST_ROOT $VIM_LIST
+
+less -SRFX $SYNC_OUTPUT_FILE
