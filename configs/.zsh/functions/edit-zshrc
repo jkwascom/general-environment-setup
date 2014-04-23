@@ -1,0 +1,4 @@
+vim "$HOME/.zshrc" < $TTY > $TTY
+echo "resourcing .zshrc"
+source "$HOME/.zshrc"
+accept-line
