@@ -1,13 +1,13 @@
 #
 # Holy Cow
 #
-if ! [ -n "$TMUX" ]; then
-  opts=(b d g p s t w y)
-  opt=${opts[$[RANDOM % 7]]}
-  echo $'\n'
-  cowsay -$opt `fortune`
-  echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-fi
+# if ! [ -n "$TMUX" ]; then
+#   opts=(b d g p s t w y)
+#   opt=${opts[$[RANDOM % 7]]}
+#   echo $'\n'
+#   cowsay -$opt `fortune`
+#   echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# fi
 
 
 #
