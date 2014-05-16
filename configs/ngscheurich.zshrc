@@ -109,7 +109,7 @@ eval "$(pyenv init -)"
 #
 # Aliases
 #
-alias rweb="ruby -run -e httpd . -p 5000"
+alias rbweb="ruby -run -e httpd . -p 5000"
 alias zshconfig="vim ~/.zshrc"
 alias zshsource="source ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
