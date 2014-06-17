@@ -97,6 +97,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'chriskempson/base16-vim'
 
 call neobundle#end()
 filetype off

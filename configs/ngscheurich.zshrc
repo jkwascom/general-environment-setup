@@ -83,6 +83,7 @@ export EDITOR='vim'
 #
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/core_perl"
 export PATH="$PATH:/bin:/usr/sbin:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/lib/python2.7/site-packages"
 
 
 #
