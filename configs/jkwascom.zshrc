@@ -152,3 +152,5 @@ if [ x$TMUX == x ]; then
     #echo 'http://linuxlefty.com/tools/favorite-vim-plugins-vi-gvim.html'
 fi
 
+#disables the  => XOFF mapping
+stty -ixon
