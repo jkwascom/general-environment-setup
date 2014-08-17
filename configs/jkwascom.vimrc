@@ -15,6 +15,7 @@ set incsearch
 set bs=2
 set history=5000
 set ignorecase
+set relativenumber
 
 syntax enable
 
@@ -57,6 +58,8 @@ map <F4> :set relativenumber!<CR>
 imap <F4> <C-O>:set relativenumber!<CR>
 set pastetoggle=<F5>
 nmap <silent> <F12> :if bufloaded($HOME . '/.vimrc') && bufnr(@%) == bufnr($HOME.'/.vimrc') <CR>w<CR>execute 'source ' . $HOME . '/.vimrc'<CR>bd<CR>else<CR>execute 'tabe ' . $HOME . '/.vimrc'<CR>endif<CR><CR>
+nmap <silent> <F11> :Unite -vertical file<CR>
+nmap <silent> <C-E> :Unite -vertical file<CR>
 
 nmap <C-W>t <C-W>T
 nmap <C-W><C-T> <C-W>t

@@ -37,16 +37,6 @@ set nowb
 
 
 ""
-"" Colors
-""
-syntax on
-colorscheme default
-set bg=dark
-hi Search cterm=NONE ctermfg=black ctermbg=yellow
-hi LineNr ctermfg=grey
-
-
-""
 "" Editor
 ""
 set nowrap                   " don't wrap lines
@@ -97,12 +87,22 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'Shougo/unite.vim'
 
 call neobundle#end()
 filetype off
 filetype plugin indent on
 
 NeoBundleCheck
+
+
+""
+"" Colors
+""
+syntax on
+set background=dark
+colorscheme base16-default
 
 
 ""

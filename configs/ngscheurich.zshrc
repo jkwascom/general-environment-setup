@@ -1,13 +1,13 @@
 #
 # Holy Cow
 #
-if ! [ -n "$TMUX" ]; then
-  opts=(b d g p s t w y)
-  opt=${opts[$[RANDOM % 7]]}
-  echo $'\n'
-  cowsay -$opt `fortune`
-  echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-fi
+# if ! [ -n "$TMUX" ]; then
+#   opts=(b d g p s t w y)
+#   opt=${opts[$[RANDOM % 7]]}
+#   echo $'\n'
+#   cowsay -$opt `fortune`
+#   echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# fi
 
 
 #
@@ -83,6 +83,7 @@ export EDITOR='vim'
 #
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/core_perl"
 export PATH="$PATH:/bin:/usr/sbin:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/lib/python2.7/site-packages"
 
 
 #
@@ -101,6 +102,7 @@ function rbenv_prompt_info() {
 #
 # pyenv
 #
+export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
@@ -108,7 +110,7 @@ eval "$(pyenv init -)"
 #
 # Aliases
 #
-alias rweb="ruby -run -e httpd . -p 5000"
+alias rbweb="ruby -run -e httpd . -p 5000"
 alias zshconfig="vim ~/.zshrc"
 alias zshsource="source ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"

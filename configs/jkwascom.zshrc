@@ -165,5 +165,5 @@ if [ x$TMUX == x ]; then
     #`tmux list-sessions 2> /dev/null 1>&2` || tmux -l && tmux attach
 fi
 
-#echo 'new-session -t 0 is the tmux command you keep looking for'
-#echo 'http://linuxlefty.com/tools/favorite-vim-plugins-vi-gvim.html'
+#disables the  => XOFF mapping
+stty -ixon
