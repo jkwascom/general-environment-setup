@@ -66,6 +66,14 @@ function preexec() {
   title "$1" "$USER@%m" "%35<...<%~"
 }
 
+function murmuring() {
+  mv /tmp/last-fortune /tmp/last-last-fortune
+  watch -n 5 "fortune | tee /tmp/last-fortune"
+  kill `pidof murmurd`
+  sed -e "s/^\(welcometext=\).*/welcometext=\"$(cat /tmp/last-fortune | tr '\"\r\n' ' ')\"/" .murmur/murmur.ini -i
+  murmurd -v -ini /home/jkwascom/.murmur/murmur.ini
+}
+
 # colorful listings
 zmodload -i zsh/complist
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -77,6 +85,11 @@ compinit
 
 alias vi=vim
 alias pacs=pacsearch
+pacsa() {
+  unbuffer pacsearch $@ > /tmp/last-pacsa-search
+  unbuffer aurget -Ss $@ >> /tmp/last-pacsa-search
+  cat /tmp/last-pacsa-search
+}
 alias paci='sudo pacman -Syu'
 # aliases
 alias mv='nocorrect mv'       # no spelling correction on mv
@@ -103,12 +116,14 @@ alias em="emacs -nw"
 alias rg="grep -ri"
 alias cat="less -FX"
 
-# functions
 mdc() { mkdir -p "$1" && cd "$1" }
 setenv() { export $1=$2 }  # csh compatibility
 sdate() { date +%Y.%m.%d }
 pc() { awk "{print \$$1}" }
 rot13 () { tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]" }
+view-process-context () {
+  ps -AH | grep -C 15 $$
+}
 vim-command-show () {
 	vim -c "redir @\" | silent $@ | redir END | set paste | exe \"normal pdd\" | x! /tmp/supertmp.tmpytmp"
   cat /tmp/supertmp.tmpytmp
@@ -134,7 +149,7 @@ prompt adam2
 #    export RPROMPT='%~ %# '
 #fi
 
-export LESS='RFX'
+export LESS='SRFX'
 export PATH=~/.local/bin:$PATH
 export POWERLINE_HOME=/lib/python3.4/site-packages/powerline
 source $POWERLINE_HOME/bindings/zsh/powerline.zsh
@@ -148,7 +163,7 @@ if [ x$TMUX == x ]; then
     tmux has-session -t 0 2> /dev/null || tmux new-session -s 0
     tmux new-session -t 0
     #`tmux list-sessions 2> /dev/null 1>&2` || tmux -l && tmux attach
-    #echo 'new-session -t 0 is the tmux command you keep looking for'
-    #echo 'http://linuxlefty.com/tools/favorite-vim-plugins-vi-gvim.html'
 fi
 
+#echo 'new-session -t 0 is the tmux command you keep looking for'
+#echo 'http://linuxlefty.com/tools/favorite-vim-plugins-vi-gvim.html'
