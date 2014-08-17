@@ -140,7 +140,7 @@ shuffle() {
   ) | sort | sed 's/^[0-9]* //'
 }
 
-prompt adam2
+prompt bigfade
 
 # prompt (if running screen, show window #)
 #if [ x$WINDOW != x ]; then
