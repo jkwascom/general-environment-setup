@@ -115,6 +115,7 @@ alias df="df -hT"
 alias em="emacs -nw"
 alias rg="grep -ri"
 alias cat="less -FX"
+alias json_prettify="python -m json.tool"
 
 mdc() { mkdir -p "$1" && cd "$1" }
 setenv() { export $1=$2 }  # csh compatibility
@@ -140,7 +141,6 @@ shuffle() {
   ) | sort | sed 's/^[0-9]* //'
 }
 
-prompt bigfade
 
 # prompt (if running screen, show window #)
 #if [ x$WINDOW != x ]; then
@@ -167,3 +167,16 @@ fi
 
 #disables the  => XOFF mapping
 stty -ixon
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+prompt bigfade blue white blue yellow
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
